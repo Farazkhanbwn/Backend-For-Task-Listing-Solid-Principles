@@ -11,7 +11,7 @@ class AuthUserRepository {
   }
 
   login = async (email: string, password: string) => {
-    const user = await this.authUserModel.findOne({ email }).select('-createdAt -updatedAt -__v').lean()
+    const user = await this.authUserModel.findOne({ email }).select('-updatedAt -__v').lean()
     const isPasswordValid = !!user && isEncryptedDataValid(password, user?.password)
 
     if (!user || !isPasswordValid) {
